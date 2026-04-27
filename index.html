@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SmallerAI — твій AI-помічник для схуднення</title>
+  <title>FoodieAI — твій AI-помічник для схуднення</title>
   <meta name="description"
     content="Telegram-бот який аналізує твій раціон щодня і допомагає досягти цілі по вазі без дієт і стресу." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -450,7 +450,7 @@
 
   <!-- NAV -->
   <nav>
-    <div class="logo">Smaller<span>AI</span></div>
+    <div class="logo">Foodie<span>AI</span></div>
     <a href="https://t.me/smaller_ai_bot" target="_blank" class="nav-cta">Спробувати →</a>
   </nav>
 
@@ -613,48 +613,48 @@
   </div>
 
   <footer>
-    © 2026 SmallerAI · <a href="https://t.me/smaller_ai_bot" target="_blank">@smaller_ai_bot</a>
+    © 2026 FoodieAI · <a href="https://t.me/smaller_ai_bot" target="_blank">@smaller_ai_bot</a>
   </footer>
 
-<script>
-  const SUPABASE_URL = 'https://xjgazcofjfceliomsibq.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqZ2F6Y29mamZjZWxpb21zaWJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODg3MTMsImV4cCI6MjA5MjM2NDcxM30.oqdt7HaNapRGg9yLrsdtVzVdxKdasCb1M0fYxl1zYNM';
+  <script>
+    const SUPABASE_URL = 'https://xjgazcofjfceliomsibq.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqZ2F6Y29mamZjZWxpb21zaWJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3ODg3MTMsImV4cCI6MjA5MjM2NDcxM30.oqdt7HaNapRGg9yLrsdtVzVdxKdasCb1M0fYxl1zYNM';
 
-  const sessionId = sessionStorage.getItem('sid') || (() => {
-    const id = Math.random().toString(36).slice(2);
-    sessionStorage.setItem('sid', id);
-    return id;
-  })();
+    const sessionId = sessionStorage.getItem('sid') || (() => {
+      const id = Math.random().toString(36).slice(2);
+      sessionStorage.setItem('sid', id);
+      return id;
+    })();
 
-  function track(event, button = null) {
-    fetch(`${SUPABASE_URL}/rest/v1/lp_events`, {
-      method: 'POST',
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        event,
-        button,
-        referrer: document.referrer || null,
-        session_id: sessionId,
-      }),
-    }).catch(() => {});
-  }
+    function track(event, button = null) {
+      fetch(`${SUPABASE_URL}/rest/v1/lp_events`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          event,
+          button,
+          referrer: document.referrer || null,
+          session_id: sessionId,
+        }),
+      }).catch(() => { });
+    }
 
-  track('page_view');
+    track('page_view');
 
-  document.querySelectorAll('a[href*="t.me"]').forEach(el => {
-    el.addEventListener('click', () => {
-      const label = el.classList.contains('nav-cta') ? 'nav'
-        : el.closest('.hero') ? 'hero'
-        : el.closest('.cta-section') ? 'bottom'
-        : 'footer';
-      track('cta_click', label);
+    document.querySelectorAll('a[href*="t.me"]').forEach(el => {
+      el.addEventListener('click', () => {
+        const label = el.classList.contains('nav-cta') ? 'nav'
+          : el.closest('.hero') ? 'hero'
+            : el.closest('.cta-section') ? 'bottom'
+              : 'footer';
+        track('cta_click', label);
+      });
     });
-  });
-</script>
+  </script>
 </body>
 
 </html>
